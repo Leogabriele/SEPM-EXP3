@@ -1,22 +1,24 @@
-name: Hello World Every Minute
+name: Minute to Minute Hello
 
 on:
   schedule:
-    - cron: "* * * * *"   # runs every 1 minute (UTC)
-  workflow_dispatch:      # allows manual trigger
+    - cron: "5 * * * *"
+  workflow_dispatch:
 
 jobs:
-  run-hello:
+  hello-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
-      - name: Run Hello World script
-        run: python hello.py
+      - name: Say Hello
+        run: |
+          echo "Hello from GitHub Actions"
+          python -c "print('Hello World')"
